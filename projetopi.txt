@@ -33,7 +33,7 @@ cinematografia varchar(100),
 originalidade varchar(100),
 comentario_tecnico text,
 
-Foreign KEY (fk_id_filmes) REFERENCES filmes(id_filme),
+Foreign KEY (fk_id_filme) REFERENCES filmes(id_filme),
 FOREIGN KEY (fk_capa) REFERENCES filmes(capa),
 FOREIGN KEY (fk_titulo) REFERENCES filmes(titulo),
 FOREIGN KEY (fk_diretor) REFERENCES filmes(diretor),
@@ -53,7 +53,7 @@ data varchar(50),
 horario varchar(50),
 local varchar(255),
 
-Foreign KEY (fk_id_filmes) REFERENCES filmes(id_filme),
+Foreign KEY (fk_id_filme) REFERENCES filmes(id_filme),
 FOREIGN KEY (fk_titulo) REFERENCES filmes(titulo),
 FOREIGN KEY (fk_diretor) REFERENCES filmes(diretor)
 );
@@ -79,7 +79,7 @@ fk_horario varchar(50),
 fk_local varchar(255),
 vagas int,
 
-Foreign KEY (fk_id_filmes) REFERENCES filmes(id_filme),
+Foreign KEY (fk_id_filme) REFERENCES filmes(id_filme),
 FOREIGN KEY (fk_capa) REFERENCES filmes(capa),
 FOREIGN KEY (fk_titulo) REFERENCES filmes(titulo),
 FOREIGN KEY (fk_diretor) REFERENCES filmes(diretor),
