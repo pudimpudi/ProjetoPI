@@ -1,0 +1,89 @@
+create database cinema;
+use cinema;
+
+create table usuarios(
+id_usuario int auto_increment primary key,
+email varchar(100),
+senha varchar(100)
+);
+
+create table filmes (
+id_filme int auto_increment primary key,
+capa varchar(255),
+titulo varchar(255) not null,
+diretor varchar(255) not null,
+genero varchar(100),
+duracao int,
+data_lancamento varchar(50),
+sinopse text,
+classificacao_indicativa varchar(50)
+);
+
+create table filmes_avaliacao(
+id_avaliacao int auto_increment primary key,
+fk_id_filme int,
+fk_capa varchar(255),
+fk_titulo varchar (255) not null, 
+fk_diretor varchar (255) not null,
+fk_genero varchar(100),
+fk_duracao int,
+fk_data_lancamento varchar(50),
+fk_classificacao_indicativa varchar(50),
+cinematografia varchar(100),
+originalidade varchar(100),
+comentario_tecnico text,
+
+Foreign KEY (fk_id_filmes) REFERENCES filmes(id_filme),
+FOREIGN KEY (fk_capa) REFERENCES filmes(capa),
+FOREIGN KEY (fk_titulo) REFERENCES filmes(titulo),
+FOREIGN KEY (fk_diretor) REFERENCES filmes(diretor),
+FOREIGN KEY (fk_genero) REFERENCES filmes(genero),
+FOREIGN KEY (fk_duracao) REFERENCES filmes(duracao),
+FOREIGN KEY (fk_data_lancamento) REFERENCES filmes(data_lancamento),
+FOREIGN KEY (fk_classificacao_indicativa) REFERENCES filmes(classificacao_indicativa)
+);
+
+create table programacao (
+id_programa int auto_increment primary key,
+fk_id_filme int,
+capa varchar(255),
+fk_titulo varchar (255) not null, 
+fk_diretor varchar (255) not null,
+data varchar(50),
+horario varchar(50),
+local varchar(255),
+
+Foreign KEY (fk_id_filmes) REFERENCES filmes(id_filme),
+FOREIGN KEY (fk_titulo) REFERENCES filmes(titulo),
+FOREIGN KEY (fk_diretor) REFERENCES filmes(diretor)
+);
+
+create table eventos (
+id_evento int auto_increment primary key,
+capa varchar(255),
+nome varchar(255),
+data varchar(50),
+hora varchar(50),
+local varchar(255),
+descricao text
+);
+
+create table ingressos (
+id_ingresso int auto_increment primary key,
+fk_id_filme int,
+fk_capa varchar(255),
+fk_titulo varchar (255) not null, 
+fk_diretor varchar (255) not null,
+fk_data varchar(50),
+fk_horario varchar(50),
+fk_local varchar(255),
+vagas int,
+
+Foreign KEY (fk_id_filmes) REFERENCES filmes(id_filme),
+FOREIGN KEY (fk_capa) REFERENCES filmes(capa),
+FOREIGN KEY (fk_titulo) REFERENCES filmes(titulo),
+FOREIGN KEY (fk_diretor) REFERENCES filmes(diretor),
+FOREIGN KEY (fk_data) REFERENCES programacao(data),
+FOREIGN KEY (fk_horario) REFERENCES programacao(horario),
+FOREIGN KEY (fk_local) REFERENCES programacao(local)
+);
