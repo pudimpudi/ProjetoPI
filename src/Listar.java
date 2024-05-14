@@ -29,7 +29,7 @@ public class Listar extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsuarios = new javax.swing.JTable();
         iblCargo = new javax.swing.JLabel();
-        cmbCargo1 = new javax.swing.JComboBox<>();
+        cmbGenero = new javax.swing.JComboBox<>();
         btnListar1 = new javax.swing.JButton();
 
         btnListar.setText("Listar");
@@ -68,14 +68,14 @@ public class Listar extends javax.swing.JFrame {
         getContentPane().add(iblCargo);
         iblCargo.setBounds(300, 40, 100, 50);
 
-        cmbCargo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Romance", "Aventura", "Suspense", "Terror/Horror", "Ação", "Documentário", "Ficção científica", "Drama", "Comédia", "Fantasia", "Musical", "Mistério" }));
-        cmbCargo1.addActionListener(new java.awt.event.ActionListener() {
+        cmbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Romance", "Aventura", "Suspense", "Terror/Horror", "Ação", "Documentário", "Ficção científica", "Drama", "Comédia", "Fantasia", "Musical", "Mistério" }));
+        cmbGenero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCargo1ActionPerformed(evt);
+                cmbGeneroActionPerformed(evt);
             }
         });
-        getContentPane().add(cmbCargo1);
-        cmbCargo1.setBounds(350, 50, 170, 30);
+        getContentPane().add(cmbGenero);
+        cmbGenero.setBounds(350, 50, 170, 30);
 
         btnListar1.setText("Listar");
         btnListar1.addActionListener(new java.awt.event.ActionListener() {
@@ -90,16 +90,16 @@ public class Listar extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbCargo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCargo1ActionPerformed
+    private void cmbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGeneroActionPerformed
         //1 - obter o cargo selecionado
-        String c = cmbCargo1.getSelectedItem().toString();
+        String g = cmbGenero.getSelectedItem().toString();
 
         try {
             //2- conectar com BD
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/empresa","root","p@$$w0rd");
+            Connection conectado = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/cinema","root","p@$$w0rd");
             //3- Fazer busca
-            PreparedStatement st = conectado.prepareStatement("SELECT * FROM usuarios WHERE cargo = ?");
+            PreparedStatement st = conectado.prepareStatement("SELECT * FROM filmes WHERE genero = ?");
             st.setString(1,c);
             ResultSet usuarios = st.executeQuery();
             DefaultTableModel tblModelo = (DefaultTableModel) tblUsuarios.getModel();
@@ -117,7 +117,7 @@ public class Listar extends javax.swing.JFrame {
         } catch (ClassNotFoundException | SQLException ex){
             JOptionPane.showMessageDialog(null, "Entre em contato com o adminsitrador. Erro: " + ex.getMessage());
         }
-    }//GEN-LAST:event_cmbCargo1ActionPerformed
+    }//GEN-LAST:event_cmbGeneroActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         String cod;
@@ -227,7 +227,7 @@ public class Listar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnListar;
     private javax.swing.JButton btnListar1;
-    private javax.swing.JComboBox<String> cmbCargo1;
+    private javax.swing.JComboBox<String> cmbGenero;
     private javax.swing.JLabel iblCargo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblUsuarios;

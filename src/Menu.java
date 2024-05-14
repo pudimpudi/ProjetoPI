@@ -35,6 +35,7 @@ public class Menu extends javax.swing.JFrame {
         itmEventos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu");
         getContentPane().setLayout(null);
 
         jMenu1.setText("MENU");
@@ -80,13 +81,19 @@ public class Menu extends javax.swing.JFrame {
         jMenu1.add(itmIngressos);
 
         itmEventos.setText("Eventos");
+        itmEventos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmEventosActionPerformed(evt);
+            }
+        });
         jMenu1.add(itmEventos);
 
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
-        pack();
+        setSize(new java.awt.Dimension(666, 410));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void itmAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAvaliacaoActionPerformed
@@ -108,6 +115,10 @@ public class Menu extends javax.swing.JFrame {
     private void itmIngressosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmIngressosActionPerformed
         new Ingressos().setVisible(true);
     }//GEN-LAST:event_itmIngressosActionPerformed
+
+    private void itmEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEventosActionPerformed
+        new Eventos().setVisible(true);
+    }//GEN-LAST:event_itmEventosActionPerformed
 
     /**
      * @param args the command line arguments

@@ -25,10 +25,10 @@ public class appData {
         conectar = DriverManager.getConnection("jdbc:mysql://localhost:3307/cinema","root","p@$$w0rd");
         
     }
-    public  void cadastrarUsuario(String u, String s) throws ClassNotFoundException, SQLException{
+    public void cadastrarUsuario(String u, String s) throws ClassNotFoundException, SQLException{
         conectar();
         //enviar os dados para o banco
-        st = conectar.prepareStatement("INSERT INTO usuarios values(?,?)");
+        st = conectar.prepareStatement("INSERT INTO usuarios (email, senha) values(?,?)");
         st.setString(1, u);
         st.setString(2, s);
         st.executeUpdate(); //salva no BD
@@ -39,8 +39,8 @@ public class appData {
         conectar();
          // 3 BUSCAR USER E SENHA
          st = conectar.prepareStatement("SELECT * FROM usuarios WHERE email = ? AND senha = ?");
-         st.setString(1, s);
-         st.setString(2, u);
+         st.setString(1, u);
+         st.setString(2, s);
          resultado = st.executeQuery();
         return resultado;
     }

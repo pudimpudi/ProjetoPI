@@ -38,6 +38,7 @@ public class Login extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
         btnEntrar = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
         getContentPane().setLayout(null);
 
