@@ -25,21 +25,169 @@ public class Listar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        btnListar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblUsuarios = new javax.swing.JTable();
+        iblCargo = new javax.swing.JLabel();
+        cmbCargo1 = new javax.swing.JComboBox<>();
+        btnListar1 = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        btnListar.setText("Listar");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
 
-        pack();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Listar filmes");
+        getContentPane().setLayout(null);
+
+        tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID do filme", "Título", "Gênero", "Diretor"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblUsuarios);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(0, 110, 740, 330);
+
+        iblCargo.setText("Gênero:");
+        getContentPane().add(iblCargo);
+        iblCargo.setBounds(300, 40, 100, 50);
+
+        cmbCargo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Romance", "Aventura", "Suspense", "Terror/Horror", "Ação", "Documentário", "Ficção científica", "Drama", "Comédia", "Fantasia", "Musical", "Mistério" }));
+        cmbCargo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCargo1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmbCargo1);
+        cmbCargo1.setBounds(350, 50, 170, 30);
+
+        btnListar1.setText("Listar");
+        btnListar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListar1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnListar1);
+        btnListar1.setBounds(540, 40, 150, 40);
+
+        setSize(new java.awt.Dimension(751, 443));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmbCargo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCargo1ActionPerformed
+        //1 - obter o cargo selecionado
+        String c = cmbCargo1.getSelectedItem().toString();
+
+        try {
+            //2- conectar com BD
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conectado = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/empresa","root","p@$$w0rd");
+            //3- Fazer busca
+            PreparedStatement st = conectado.prepareStatement("SELECT * FROM usuarios WHERE cargo = ?");
+            st.setString(1,c);
+            ResultSet usuarios = st.executeQuery();
+            DefaultTableModel tblModelo = (DefaultTableModel) tblUsuarios.getModel();
+            while(usuarios.next()){
+
+                Object linha[] = {
+                    usuarios.getString("usuario"),
+                    usuarios.getString("senha"),
+                    usuarios.getString("cargo")
+
+                };
+                tblModelo.addRow(linha);
+            }
+
+        } catch (ClassNotFoundException | SQLException ex){
+            JOptionPane.showMessageDialog(null, "Entre em contato com o adminsitrador. Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_cmbCargo1ActionPerformed
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        String cod;
+        cod = txtCodigo.getText();
+        if(cod.equals("")){
+            carregarDados();
+            return; //exit p/ execução
+        }
+        try{
+            //1 - canectar com banco de dados
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3307/prova","root","p@$$w0rd");
+            //buscar usuarios na tabela com o cargo = slaoq
+            PreparedStatement st = conectado.prepareStatement("SELECT * FROM curso WHERE cod_curso = ?");
+            st.setString(1, cod);
+            ResultSet curso = st.executeQuery(); //executa o comando acima
+            DefaultTableModel tblModelo = (DefaultTableModel) tblCursos.getModel();
+            tblModelo.setRowCount(0); // limpa a tela
+            //enquanto existirem linhas na tabela usuarios
+            //ele executa(usuarios aqui == variavel suas linhas acima)
+            while(curso.next()){
+
+                Object dados[] = {
+                    curso.getString("cod_curso"),
+                    curso.getString("area_curso"),
+                    curso.getString("numero_semestres"),
+                    curso.getString("nome_coordenador")
+                };
+                tblModelo.addRow(dados);
+            }
+
+        } catch (ClassNotFoundException | SQLException ex){
+            JOptionPane.showMessageDialog(null, "Entre em contato com o suporte e informe o erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnListarActionPerformed
+
+    private void btnListar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListar1ActionPerformed
+        String cod;
+        cod = txtCodigo.getText();
+        if(cod.equals("")){
+            carregarDados();
+            return; //exit p/ execução
+        }
+        try{
+            //1 - canectar com banco de dados
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3307/prova","root","p@$$w0rd");
+            //buscar usuarios na tabela com o cargo = slaoq
+            PreparedStatement st = conectado.prepareStatement("SELECT * FROM curso WHERE cod_curso = ?");
+            st.setString(1, cod);
+            ResultSet curso = st.executeQuery(); //executa o comando acima
+            DefaultTableModel tblModelo = (DefaultTableModel) tblCursos.getModel();
+            tblModelo.setRowCount(0); // limpa a tela
+            //enquanto existirem linhas na tabela usuarios
+            //ele executa(usuarios aqui == variavel suas linhas acima)
+            while(curso.next()){
+
+                Object dados[] = {
+                    curso.getString("cod_curso"),
+                    curso.getString("area_curso"),
+                    curso.getString("numero_semestres"),
+                    curso.getString("nome_coordenador")
+                };
+                tblModelo.addRow(dados);
+            }
+
+        } catch (ClassNotFoundException | SQLException ex){
+            JOptionPane.showMessageDialog(null, "Entre em contato com o suporte e informe o erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnListar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,5 +225,11 @@ public class Listar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnListar;
+    private javax.swing.JButton btnListar1;
+    private javax.swing.JComboBox<String> cmbCargo1;
+    private javax.swing.JLabel iblCargo;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblUsuarios;
     // End of variables declaration//GEN-END:variables
 }

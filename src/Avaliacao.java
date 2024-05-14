@@ -139,10 +139,15 @@ public class Avaliacao extends javax.swing.JFrame {
         txtComentario.setBounds(180, 350, 240, 90);
 
         btnEnviarAvaliacao.setText("Enviar avaliação");
+        btnEnviarAvaliacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarAvaliacaoActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnEnviarAvaliacao);
         btnEnviarAvaliacao.setBounds(200, 460, 190, 40);
 
-        setSize(new java.awt.Dimension(662, 542));
+        setSize(new java.awt.Dimension(557, 542));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -161,6 +166,10 @@ public class Avaliacao extends javax.swing.JFrame {
     private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataActionPerformed
+
+    private void btnEnviarAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarAvaliacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEnviarAvaliacaoActionPerformed
 
     /**
      * @param args the command line arguments
