@@ -112,6 +112,11 @@ public class Submissao extends javax.swing.JFrame {
         cnbClassificacao.setBounds(190, 330, 230, 30);
 
         btnSubmeter.setText("Submeter Filme");
+        btnSubmeter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmeterActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnSubmeter);
         btnSubmeter.setBounds(200, 390, 170, 40);
 
@@ -147,6 +152,10 @@ public class Submissao extends javax.swing.JFrame {
     private void cnbGeneroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cnbGeneroItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cnbGeneroItemStateChanged
+
+    private void btnSubmeterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmeterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSubmeterActionPerformed
 
     /**
      * @param args the command line arguments
